@@ -57,7 +57,6 @@ public class TituloController {
 	}
 	
 	@RequestMapping
-//	public ModelAndView pesquisar(@RequestParam(defaultValue = "%") String descricao) {
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
 		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
 		

@@ -38,3 +38,18 @@
 	float: left;
 	padding-top: 2px;
 }
+
+.rodape {  
+    position:absolute;
+    bottom:0;
+    width:100%;
+    margin-top: 10%;
+    padding-top: 30px;
+    padding-bottom: 25px;
+    background-color: #ffbf00;
+    color: aliceblue;
+}
+
+b{
+	color: black;
+}
