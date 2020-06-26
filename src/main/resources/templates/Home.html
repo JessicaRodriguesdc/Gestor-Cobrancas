@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{LayoutPadrao}">
+	
+<head>
+    <title>Home</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="panel panel-default">
+    		<div class="panel-heading">
+	    		<div class="clearfix">
+	    			<h1 class="panel-title aw-titulo-panel"><b><i class="glyphicon glyphicon-home"></i>Home</b></h1>
+	    			<span class="input-group-btn">
+	    			<a class="btn btn-link aw-link-panel" th:href="@{/titulos/pesquisar}">
+	    				<button type="button" class="btn btn-default">
+	    					<b>
+		    					<i class="glyphicon glyphicon-book"></i>
+		    			 		Títulos
+	    					</b>	
+	    				</button>
+	    			</a>
+	    		
+    			</span>			
+	    		</div>
+    		</div>   		
+    		<div class="panel-body">
+    			
+			</div>
+    	</div>	
+</section>
+</html>

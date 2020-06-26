@@ -28,10 +28,19 @@ import com.gestor.cobranca.service.CadastroTituloService;
 @RequestMapping("/titulos")
 public class TituloController {
 	
+	public static final String HOME_VIEW = "Home";
+	
 	public static final String CADASTRO_VIEW = "CadastroTitulo";
 	
 	@Autowired
 	private CadastroTituloService cadastroTituloService;
+	
+	
+	@RequestMapping
+    public String home() {
+        return HOME_VIEW;
+    }
+	
 	
 	@RequestMapping("/novo")
     public ModelAndView novo() {
@@ -56,7 +65,7 @@ public class TituloController {
 		
 	}
 	
-	@RequestMapping
+	@RequestMapping("/pesquisar")
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
 		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
 		
