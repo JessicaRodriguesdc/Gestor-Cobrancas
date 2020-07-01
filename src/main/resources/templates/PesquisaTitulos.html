@@ -64,8 +64,9 @@
 					<thead>
 						<tr>
 							<th id="NotUser"></th>
-							<th class="col-md-4">Descrição</th>
-							<th class="text-center col-md-3">Data de vencimento</th>
+							<th class="col-md-3">Descrição</th>
+							<th class="text-center col-md-2">Data da Cobrança</th>
+							<th class="text-center col-md-2">Data de vencimento</th>
 							<th class="text-right col-md-2">Valor</th>
 							<th class="text-center col-md-2">Status</th>
 							<th class="col-md-1"></th>
@@ -75,6 +76,7 @@
 						<tr th:each = "titulo: ${titulos}">
 							<td th:text="${titulo.codigo}" id="NotUser"></td>
 							<td th:text="${titulo.descricao}"></td>
+							<td class="text-center" th:text="${{titulo.dataCobranca}}"></td>
 							<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
 							<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>
 							<td class="text-center" th:attr="data-role=${titulo.codigo}">

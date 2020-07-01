@@ -32,7 +32,11 @@ public class Titulo {
 	@NotBlank(message = "Descrição é obrigatória")
 	@Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
 	private String descricao;
-	
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date dataCobranca = new Date();
+
 	@NotNull(message = "Date de vencimento é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
@@ -60,7 +64,15 @@ public class Titulo {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
+	public Date getDataCobranca() {
+		return dataCobranca;
+	}
+
+	public void setDataCobranca(Date dataCobranca) {
+		this.dataCobranca = dataCobranca;
+	}
+
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}
