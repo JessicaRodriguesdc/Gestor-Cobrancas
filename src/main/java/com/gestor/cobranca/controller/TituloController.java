@@ -3,6 +3,7 @@ package com.gestor.cobranca.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gestor.cobranca.service.GraficoStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -34,11 +35,23 @@ public class TituloController {
 	
 	@Autowired
 	private CadastroTituloService cadastroTituloService;
+
+	@Autowired
+	private GraficoStatusService graficoStatusService;
 	
 	
 	@RequestMapping
-    public String home() {
-        return HOME_VIEW;
+    public ModelAndView home() {
+		Long pen = graficoStatusService.pendente();
+		Long rec = graficoStatusService.recebido();
+
+		System.out.println(pen);
+		System.out.println(rec);
+
+		ModelAndView mv = new ModelAndView(HOME_VIEW);
+		mv.addObject("pendente",pen);
+		mv.addObject("recebido",rec);
+		return mv;
     }
 	
 	
