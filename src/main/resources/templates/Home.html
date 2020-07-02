@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://thymeleaf.org"
-	  xmlns:p="http://primefaces.org/ui"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{LayoutPadrao}">
 	
@@ -27,13 +26,32 @@
 	    		</div>
     		</div>   		
     		<div class="panel-body">
-				<form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object=${filtro}>
-					<!--<div th:each = "titulo: ${titulos}">
+				<form method="GET" class="form-horizontal" th:action="@{/titulos}">
+
+					<h2>Gerencie suas Cobranças</h2>
+					<br>
+					<div class="painelStatus center"  align="center">
+						<div class="pendente">
+							<center><label class="quantStatu">Pendentes</label></center>
+							<br>
+							<center><label class="quantStatu" th:text="${pendente}"></label></center>
+						</div>
+						<div class="recebido">
+							<center><label class="quantStatu">Recebidos</label></center>
+							<br>
+							<center><label class="quantStatu" th:text="${recebido}"></label></center>
+						</div>
+					</div>
+
+
+					<!--
+					<div th:each = "titulo: ${titulos}">
 						<p:chart type="line" th:model="${titulo.status.descricao}"
 								 style="height:300px" />
-					</div>-->
+					</div>
 					<p:chart type="line" model="#{Titulo.status}"
 							 style="height:300px" />
+					-->
 				</form>
 			</div>
     	</div>	
