@@ -4,6 +4,7 @@ package com.gestor.cobranca.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +24,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 
 @Entity
+@ManagedBean("Titulo")
 public class Titulo {
 	
 	@Id

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://thymeleaf.org"
+	  xmlns:p="http://primefaces.org/ui"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{LayoutPadrao}">
 	
@@ -26,7 +27,14 @@
 	    		</div>
     		</div>   		
     		<div class="panel-body">
-    			
+				<form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object=${filtro}>
+					<!--<div th:each = "titulo: ${titulos}">
+						<p:chart type="line" th:model="${titulo.status.descricao}"
+								 style="height:300px" />
+					</div>-->
+					<p:chart type="line" model="#{Titulo.status}"
+							 style="height:300px" />
+				</form>
 			</div>
     	</div>	
 </section>
