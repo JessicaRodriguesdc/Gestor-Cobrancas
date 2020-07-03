@@ -26,10 +26,10 @@ import com.gestor.cobranca.service.CadastroTituloService;
 
 
 @Controller
-@RequestMapping("/titulos")
+@RequestMapping("/cobranca/titulos")
 public class TituloController {
 
-	public static final String LOGIN_VIEW = "Login";
+	//public static final String LOGIN_VIEW = "Login";
 
 	public static final String HOME_VIEW = "Home";
 	
@@ -41,20 +41,20 @@ public class TituloController {
 	@Autowired
 	private GraficoStatusService graficoStatusService;
 
-	@RequestMapping
-	public String login() {
-		return LOGIN_VIEW;
-	}
-
-	@RequestMapping(value="/logar", method = RequestMethod.POST)
-	public String logar() {
-		return HOME_VIEW;
-	}
-
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String cadastrar() {
-		return LOGIN_VIEW;
-	}
+//	@RequestMapping
+//	public String login() {
+//		return LOGIN_VIEW;
+//	}
+//
+//	@RequestMapping(value="/logar", method = RequestMethod.POST)
+//	public String logar() {
+//		return HOME_VIEW;
+//	}
+//
+//	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+//	public String cadastrar() {
+//		return LOGIN_VIEW;
+//	}
 
 
 	@RequestMapping("/dashboard")
@@ -84,7 +84,7 @@ public class TituloController {
 		try {
 			cadastroTituloService.salvar(titulo);
 			attributes.addFlashAttribute("mensagem","Titulo salvo com sucesso!");		
-			return "redirect:/titulos/novo";
+			return "redirect:/cobranca/titulos/novo";
 		}catch(IllegalAccessException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
@@ -115,11 +115,12 @@ public class TituloController {
 		cadastroTituloService.excluir(codigo);
 		
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
-		return "redirect:/titulos";
+		return "redirect:/cobranca/titulos/pesquisar";
 	}
 	
 	@RequestMapping(value="/{codigo}/receber", method = RequestMethod.PUT)
 	public @ResponseBody String receber(@PathVariable Long codigo){
+
 		return cadastroTituloService.receber(codigo);
 	}
 	

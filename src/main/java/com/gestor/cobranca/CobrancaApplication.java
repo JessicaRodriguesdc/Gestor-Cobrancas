@@ -30,7 +30,7 @@ public class CobrancaApplication extends SpringBootServletInitializer{
 
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
-			registry.addRedirectViewController("/", "/titulos");
+			registry.addRedirectViewController("/", "/cobranca");
 		}
 
 	}

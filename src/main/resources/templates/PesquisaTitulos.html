@@ -21,7 +21,7 @@
 		    		</b>
 	    		</h1>
 	    		<span class="input-group-btn">
-	    		 	<a class="btn btn-link aw-link-panel" th:href="@{/titulos/novo}">
+	    		 	<a class="btn btn-link aw-link-panel" th:href="@{/cobranca/titulos/novo}">
 	    				<button type="button" class="btn btn-default">
 		    				<b>
 			    				<i class="glyphicon glyphicon-plus-sign"></i>
@@ -29,7 +29,7 @@
 		    				</b>	
 	    				</button>
 	    			</a>
-	    			<a class="btn btn-link aw-link-panel" th:href="@{/titulos/dashboard}">
+	    			<a class="btn btn-link aw-link-panel" th:href="@{/cobranca/titulos/dashboard}">
 	    			<button type="button" class="btn btn-default">
 	    					<b>
 		    					<i class="glyphicon glyphicon-home"></i>
@@ -42,7 +42,7 @@
     	</div>
     	
     	<div class="panel-body">
-    		<form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object=${filtro}>
+    		<form method="GET" class="form-horizontal" th:action="@{/cobranca/titulos}" th:object=${filtro}>
     			<div class="form-group">
     				<div class="col-sm-4">
     					<div class="input-group">
@@ -84,7 +84,7 @@
 									th:Classappend="${titulo.pendente ? 'label-danger': 'label-success'}"></span>
 							</td>	
 							<td class="text-center">
-								<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}" 
+								<a class="btn btn-link btn-xs" th:href="@{/cobranca/titulos/{codigo}(codigo=${titulo.codigo})}"
 		   								title="Editar" rel="tooltip" data-placement="top">
 		   							<span class="glyphicon glyphicon-pencil"></span>
 		   						</a>
@@ -96,7 +96,7 @@
 								<a class="btn btn-link btn-xs js-atualizar-status" th:if="${titulo.pendente}"
 									title="Receber" rel="tooltip" data-placement="top"
 									th:attr="data-codigo=${titulo.codigo}"
-									th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codigo})}">
+									th:href="@{/cobranca/titulos/{codigo}/receber(codigo=${titulo.codigo})}">
 									<span class="glyphicon glyphicon-check"></span>
 								</a>
 							</td>
