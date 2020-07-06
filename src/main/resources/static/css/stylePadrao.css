@@ -32,6 +32,17 @@ Body{
 }
 */
 
+#sair{
+	padding-top: 25px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#sair img{
+	background-color: white;
+}
+
+
 #titulo{
 	font-size: 40px;
 	padding-top: 15px;
