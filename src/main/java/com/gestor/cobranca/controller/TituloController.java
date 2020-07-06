@@ -39,7 +39,7 @@ public class TituloController {
 	@Autowired
 	private GraficoStatusService graficoStatusService;
 
-	@RequestMapping("/dashboard")
+	@RequestMapping
     public ModelAndView home() {
 		Long pen = graficoStatusService.pendente();
 		Long rec = graficoStatusService.recebido();

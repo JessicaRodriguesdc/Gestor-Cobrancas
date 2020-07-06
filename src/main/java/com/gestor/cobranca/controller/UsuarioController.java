@@ -19,7 +19,7 @@ public class UsuarioController {
 
     @RequestMapping(value="/logar", method = RequestMethod.POST)
     public String logar() {
-        return "redirect:/cobranca/titulos/dashboard";
+        return "redirect:/cobranca/titulos";
     }
 
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
