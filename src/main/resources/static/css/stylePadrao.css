@@ -85,6 +85,7 @@ th{
 	color: white;
 }
 
+/*
 .rodape {  
     position:absolute;
     bottom:0;
@@ -92,10 +93,11 @@ th{
     margin-top: 10%;
     padding-top: 30px;
     padding-bottom: 25px;
-    /*background-color: #ffbf00;*/
+    background-color: #ffbf00;
     background-color: #004600;
     color: aliceblue;
 }
+*/
 
 .pendente{
 	background-color: #942a25;
