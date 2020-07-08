@@ -1,8 +1,11 @@
 package com.gestor.cobranca.controller;
 
+import com.gestor.cobranca.configuracao.Util;
 import com.gestor.cobranca.model.Usuario;
+import com.gestor.cobranca.repository.Usuarios;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +20,9 @@ public class UsuarioController {
 
     public static final String HOME_VIEW = "Home";
 
+    @Autowired
+    private Usuarios repository;
+
     @RequestMapping
     public String login(Usuario usuario) {
         return LOGIN_VIEW;
@@ -24,10 +30,15 @@ public class UsuarioController {
 
     @RequestMapping(value="/logar", method = RequestMethod.POST)
     public String logar(Usuario usuario, HttpSession session,RedirectAttributes attributes) {
-        if(usuario.getLogin().equals("dada") && usuario.getSenha().equals("123")){
-            usuario.setNome("Jessica");
+        usuario = this.repository
+                .findByLoginAndSenha(usuario.getLogin(),Util.md5(usuario.getSenha()));
+
+        if(usuario != null){
             //Guardar sessao o objeto usuario
             session.setAttribute("usuarioLogado",usuario);
+            System.out.println(usuario.getId());
+            System.out.println(usuario.getNome());
+
             return "redirect:/cobranca/titulos";
         }else {
             //enviar mensagem de erro
@@ -37,8 +48,13 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-    public String cadastrar(Usuario usuario) {
-        return "redirect:/cobranca/logar";
+    public String cadastrar(@Validated Usuario usuario) {
+
+        Usuario usuarioCadastrar = usuario;
+        usuarioCadastrar.setSenha(Util.md5(usuario.getSenha()));
+        repository.save(usuarioCadastrar);
+
+        return "redirect:/cobranca";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
