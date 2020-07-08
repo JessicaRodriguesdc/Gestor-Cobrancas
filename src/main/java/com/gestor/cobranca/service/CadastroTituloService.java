@@ -2,6 +2,7 @@ package com.gestor.cobranca.service;
 
 import java.util.List;
 
+import com.gestor.cobranca.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,8 @@ public class CadastroTituloService {
 		return StatusTitulo.RECEBIDO.getDescricao();
 	}
 	
-	public List<Titulo> filtrar(TituloFilter filtro){
+	public List<Titulo> filtrar(TituloFilter filtro, Usuario usuario){
 		String descricao = filtro.getDescricao() == null ? "" : filtro.getDescricao();		
-		return titulos.findByDescricaoContaining(descricao);
+		return titulos.findByDescricaoContainingAndUsuario(descricao,usuario);
 	}
 }

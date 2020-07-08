@@ -3,6 +3,8 @@ package com.gestor.cobranca.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gestor.cobranca.model.Usuario;
+import com.gestor.cobranca.repository.Usuarios;
 import com.gestor.cobranca.service.GraficoStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,6 +26,8 @@ import com.gestor.cobranca.repository.Titulos;
 import com.gestor.cobranca.repository.filter.TituloFilter;
 import com.gestor.cobranca.service.CadastroTituloService;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/cobranca/titulos")
@@ -39,10 +43,18 @@ public class TituloController {
 	@Autowired
 	private GraficoStatusService graficoStatusService;
 
+	@Autowired
+	private Usuarios repository;
+
 	@RequestMapping
-    public ModelAndView home() {
-		Long pen = graficoStatusService.pendente();
-		Long rec = graficoStatusService.recebido();
+    public ModelAndView home(HttpSession session) {
+		Usuario usuario =  new Usuario();
+		usuario.setId(3l);
+
+		session.getAttributeNames();
+
+		Long pen = graficoStatusService.pendente(usuario);
+		Long rec = graficoStatusService.recebido(usuario);
 
 		ModelAndView mv = new ModelAndView(HOME_VIEW);
 		mv.addObject("pendente",pen);
@@ -76,7 +88,9 @@ public class TituloController {
 	
 	@RequestMapping("/pesquisar")
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
-		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
+		Usuario usuario =  new Usuario();
+		usuario.setId(3l);
+		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro,usuario);
 		
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
 		mv.addObject("titulos",todosTitulos);

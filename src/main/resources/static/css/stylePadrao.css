@@ -9,10 +9,6 @@
 		margin-left: 10px;
 		margin-right: 10px;
 	}
-
-	.painelStatus{
-
-	}
 }
 
 Body{
@@ -20,7 +16,6 @@ Body{
 }
 
 #cabecalho{
-	/*background-color: #fff200;*/
 	background-color: #004600;
 	padding-bottom: 20px;
 }
@@ -31,10 +26,18 @@ Body{
 	justify-content: flex-end;
 }
 
-#sair img{
+#sair #iconeSair{
 	background-color: white;
 }
 
+/*
+#usuario{
+	display: flex;
+	justify-content: flex-end;
+	font-size: 18pt;
+	color: white;
+}
+*/
 
 #titulo{
 	font-size: 40px;
