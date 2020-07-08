@@ -48,8 +48,4 @@ public class CadastroTituloService {
 		String descricao = filtro.getDescricao() == null ? "" : filtro.getDescricao();		
 		return titulos.findByDescricaoContaining(descricao);
 	}
-
-	
-	
-	
 }
