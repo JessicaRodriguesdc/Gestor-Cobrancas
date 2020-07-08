@@ -14,8 +14,9 @@
 <body>
     <div class="panel panel-default">
 
-        <div th:replace="MensagemGeral"></div>
-        <div th:replace="MensagemErro"></div>
+        <div class="alert alert-danger" th:if="${!#strings.isEmpty(mensagem)}">
+            <center><span th:text="${mensagem}"></span></center>
+        </div>
 
         <div class="panel-body">
             <div class="container" >
