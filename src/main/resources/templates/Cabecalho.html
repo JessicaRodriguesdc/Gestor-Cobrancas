@@ -2,13 +2,11 @@
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	
-	
+
 	<nav class="navbar navbar-inverse navbar-static-top" id="cabecalho">
         <div class="container-fluid">
             <div class="navbar-header">
                 <div id="titulo">
-                   <!--<img alt ="G.I.C" th:src="@{/images/logo.png}" id="logo"/> -->                	
                   	 <b>
 	                  	<i class="glyphicon glyphicon-xbt"></i>	
 	                  	G.I Cobranças
@@ -16,7 +14,9 @@
                 </div>
             </div>
             <div id="sair">
-                <a class="nav-link" th:href="@{/cobranca}"><img src="https://img.icons8.com/ios-glyphs/40/000000/enter-2.png"/></a>
+                <a class="nav-link" th:href="@{/cobranca}">
+                    <img src="https://img.icons8.com/ios-glyphs/40/000000/enter-2.png"/>
+                </a>
             </div>
         </div>
     </nav>
