@@ -4,12 +4,15 @@ import com.gestor.cobranca.configuracao.Util;
 import com.gestor.cobranca.model.Usuario;
 import com.gestor.cobranca.repository.Usuarios;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -29,15 +32,17 @@ public class UsuarioController {
     }
 
     @RequestMapping(value="/logar", method = RequestMethod.POST)
-    public String logar(Usuario usuario, HttpSession session,RedirectAttributes attributes) {
+    public String logar(Usuario usuario, HttpSession session, RedirectAttributes attributes, HttpServletRequest request ) {
+        request.getSession();
+
         usuario = this.repository
                 .findByLoginAndSenha(usuario.getLogin(),Util.md5(usuario.getSenha()));
 
         if(usuario != null){
             //Guardar sessao o objeto usuario
             session.setAttribute("usuarioLogado",usuario);
-            System.out.println(usuario.getId());
-            System.out.println(usuario.getNome());
+            System.out.println(request.getSession().getAttribute("usuarioLogado"));
+            System.out.println(session.getAttribute("usuarioLogado"));
 
             return "redirect:/cobranca/titulos";
         }else {

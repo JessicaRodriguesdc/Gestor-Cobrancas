@@ -4,14 +4,7 @@ package com.gestor.cobranca.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -23,6 +16,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 
 @Entity
+@Table(name = "titulo")
 public class Titulo {
 	
 	@Id
@@ -50,7 +44,12 @@ public class Titulo {
 	
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+
+
 	public Long getCodigo() {
 		return codigo;
 	}
