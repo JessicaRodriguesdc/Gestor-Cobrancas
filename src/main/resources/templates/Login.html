@@ -13,6 +13,10 @@
 </head>
 <body>
     <div class="panel panel-default">
+
+        <div th:replace="MensagemGeral"></div>
+        <div th:replace="MensagemErro"></div>
+
         <div class="panel-body">
             <div class="container" >
                 <a class="links" id="paracadastro"></a>
@@ -21,30 +25,34 @@
                 <div class="content">
                     <!--FORMULÁRIO DE LOGIN-->
                     <div id="login">
-                        <form class="form-horizontal" method="Post" th:action="@{/cobranca/logar}">
+                        <form class="form-horizontal" method="Post" th:action="@{/cobranca/logar}" th:object="${usuario}">
                             <h1>$ Logar-se</h1>
                             <p>
-                                <label for="nome_login">Seu nome</label>
+                                <label for="login_log">Login</label>
                                 <input
-                                        id="nome_login"
-                                        name="nome_login"
+                                        id="login_log"
+                                        name="login_log"
                                         required="required"
                                         type="text"
-                                        placeholder="ex. contato@htmlecsspro.com"/>
+                                        placeholder="ex. contato@htmlecsspro.com"
+                                        th:field="*{login}"
+                                />
                             </p>
 
                             <p>
-                                <label for="senha_login">Sua senha</label>
+                                <label for="senha_log">Senha</label>
                                 <input
-                                        id="senha_login"
-                                        name="senha_login"
+                                        id="senha_log"
+                                        name="senha_log"
                                         required="required"
                                         type="password"
-                                        placeholder="ex. senha" />
+                                        placeholder="ex. senha"
+                                        th:field="*{senha}"
+                                />
                             </p>
 
                             <p>
-                                <input type="submit" value="Logar" />
+                                <input type="submit" value="Logar"/>
                             </p>
 
                             <p class="link">
@@ -56,14 +64,28 @@
 
                     <!--FORMULÁRIO DE CADASTRO-->
                     <div id="cadastro">
-                        <form method="post" class="form-horizontal" th:action="@{/cobranca/cadastrar}">
+                        <form method="post" class="form-horizontal" th:action="@{/cobranca/cadastrar}" th:object="${usuario}">
                             <h1>$ Cadastrar-se</h1>
                             <p>
                                 <label for="nome_cad">Seu nome</label>
                                 <input
-                                        id="nome_cad" name="nome_cad"
+                                        id="nome_cad"
+                                        name="nome_cad"
                                         required="required"
-                                        type="text" placeholder="nome" />
+                                        type="text" placeholder="nome"
+                                        th:field="*{nome}"
+                                />
+                            </p>
+
+                            <p>
+                                <label for="login_cad">Seu nome</label>
+                                <input
+                                        id="login_cad"
+                                        name="login_cad"
+                                        required="required"
+                                        type="text" placeholder="nome"
+                                        th:field="*{login}"
+                                />
                             </p>
 
                             <p>
@@ -73,7 +95,9 @@
                                         name="email_cad"
                                         required="required"
                                         type="email"
-                                        placeholder="contato@htmlecsspro.com"/>
+                                        placeholder="contato@htmlecsspro.com"
+                                        th:field="*{email}"
+                                />
                             </p>
 
                             <p>
@@ -83,7 +107,9 @@
                                         name="senha_cad"
                                         required="required"
                                         type="password"
-                                        placeholder="ex. 1234"/>
+                                        placeholder="ex. 1234"
+                                        th:field="*{senha}"
+                                />
                             </p>
 
                             <p>
