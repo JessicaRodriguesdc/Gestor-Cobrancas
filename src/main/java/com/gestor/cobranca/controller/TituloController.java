@@ -55,9 +55,6 @@ public class TituloController {
 		Long pen = graficoStatusService.pendente(usuario);
 		Long rec = graficoStatusService.recebido(usuario);
 
-		System.out.println(rec);
-		System.out.println(pen);
-
 		ModelAndView mv = new ModelAndView(HOME_VIEW);
 		mv.addObject("pendente",pen);
 		mv.addObject("recebido",rec);
