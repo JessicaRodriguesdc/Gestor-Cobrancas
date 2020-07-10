@@ -19,8 +19,6 @@ public class UsuarioController {
 
     public static final String LOGIN_VIEW = "Login";
 
-    public static final String HOME_VIEW = "Home";
-
     @Autowired
     private Usuarios repository;
 
@@ -39,9 +37,6 @@ public class UsuarioController {
         if(usuario != null){
             //Guardar sessao o objeto usuario
             session.setAttribute("usuarioLogado",usuario);
-            System.out.println(request.getSession().getAttribute("usuarioLogado"));
-            System.out.println(session.getAttribute("usuarioLogado"));
-
             return "redirect:/cobranca/titulos";
         }else {
             //enviar mensagem de erro
