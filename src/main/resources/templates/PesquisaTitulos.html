@@ -43,7 +43,7 @@
     	
     	<div class="panel-body">
     		<form method="GET" class="form-horizontal"
-				  th:action="@{/cobranca/titulos/{usuario}?(usuario=${session.usuarioLogado})}" th:object=${filtro}>
+				  th:action="@{/cobranca/titulos/pesquisar}" th:object=${filtro}>
     			<div class="form-group">
     				<div class="col-sm-4">
     					<div class="input-group">
