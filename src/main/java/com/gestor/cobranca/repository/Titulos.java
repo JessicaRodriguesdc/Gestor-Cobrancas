@@ -1,5 +1,6 @@
 package com.gestor.cobranca.repository;
 
+import java.net.UnknownServiceException;
 import java.util.List;
 
 import com.gestor.cobranca.model.StatusTitulo;
@@ -18,5 +19,10 @@ public interface Titulos extends JpaRepository<Titulo, Long> {
 
 	@Query("select count(t.status), u.id from Titulo as t join Usuario as u on t.usuario = u.id " +
 			"where u.id = :idUser and t.status like :statu group by u.id")
-	long contarStatu(@Param("statu") StatusTitulo statu,@Param("idUser") Long idUser);
+	Long contarStatu(@Param("statu") StatusTitulo statu,@Param("idUser") Long idUser);
+
+	boolean existsByUsuario(Usuario usuario);
+
+	boolean existsByStatusAndUsuario(StatusTitulo statu,Usuario usuario);
+
 }

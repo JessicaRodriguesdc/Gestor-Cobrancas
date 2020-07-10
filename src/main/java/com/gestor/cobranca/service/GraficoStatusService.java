@@ -11,11 +11,27 @@ public class GraficoStatusService {
     private Titulos titulos;
 
     public Long pendente(Usuario usuario) {
-        return titulos.contarStatu(StatusTitulo.PENDENTE,usuario.getId());
+        if(titulos.existsByUsuario(usuario)){
+            if(titulos.existsByStatusAndUsuario(StatusTitulo.PENDENTE,usuario)) {
+                Long pen = titulos.contarStatu(
+                        StatusTitulo.PENDENTE, usuario.getId());
+                System.out.println(pen);
+                return pen;
+            }
+            return 0L;
+        }
+        return 0L;
     }
 
-    public Long recebido(Usuario usuario){
-        return titulos.contarStatu(StatusTitulo.RECEBIDO,usuario.getId());
+    public Long recebido(Usuario usuario) {
+        if (titulos.existsByUsuario(usuario)) {
+            if(titulos.existsByStatusAndUsuario(StatusTitulo.RECEBIDO,usuario)){
+                Long rec =  titulos.contarStatu(
+                        StatusTitulo.RECEBIDO, usuario.getId());
+                return rec;
+            }
+            return 0L;
+        }
+        return 0L;
     }
-
 }
