@@ -96,7 +96,15 @@ public class Titulo {
 	public boolean isPendente() {
 		return StatusTitulo.PENDENTE.equals(this.status);
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
