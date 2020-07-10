@@ -49,7 +49,7 @@ public class TituloController {
 	@RequestMapping
     public ModelAndView home(HttpSession session) {
 		Usuario usuario =  new Usuario();
-		usuario.setId(3l);
+		usuario.setId(4l);
 
 		session.getAttributeNames();
 
@@ -89,7 +89,7 @@ public class TituloController {
 	@RequestMapping("/pesquisar")
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
 		Usuario usuario =  new Usuario();
-		usuario.setId(3l);
+		usuario.setId(4l);
 		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro,usuario);
 		
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
