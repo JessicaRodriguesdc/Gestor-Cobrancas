@@ -26,6 +26,7 @@ import com.gestor.cobranca.repository.Titulos;
 import com.gestor.cobranca.repository.filter.TituloFilter;
 import com.gestor.cobranca.service.CadastroTituloService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -47,14 +48,15 @@ public class TituloController {
 	private Usuarios repository;
 
 	@RequestMapping
-    public ModelAndView home(HttpSession session) {
-		Usuario usuario =  new Usuario();
-		usuario.setId(4l);
+    public ModelAndView home(HttpServletRequest request) {
 
-		session.getAttributeNames();
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
 
 		Long pen = graficoStatusService.pendente(usuario);
 		Long rec = graficoStatusService.recebido(usuario);
+
+		System.out.println(rec);
+		System.out.println(pen);
 
 		ModelAndView mv = new ModelAndView(HOME_VIEW);
 		mv.addObject("pendente",pen);
@@ -71,25 +73,25 @@ public class TituloController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Titulo titulo, Errors errors,RedirectAttributes attributes) {
-		if(errors.hasErrors()) {
-			return CADASTRO_VIEW;
-		}
-		try {
-			cadastroTituloService.salvar(titulo);
-			attributes.addFlashAttribute("mensagem","Titulo salvo com sucesso!");		
-			return "redirect:/cobranca/titulos/novo";
-		}catch(IllegalAccessException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_VIEW;
-		}
-		
+	public String salvar(@Validated Titulo titulo, Errors errors,RedirectAttributes attributes,HttpServletRequest request) {
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+			if(errors.hasErrors()) {
+				return CADASTRO_VIEW;
+			}
+			try {
+				cadastroTituloService.salvar(titulo,usuario);
+				attributes.addFlashAttribute("mensagem","Titulo salvo com sucesso!");
+				return "redirect:/cobranca/titulos/novo";
+			}catch(IllegalAccessException e) {
+				errors.rejectValue("dataVencimento", null, e.getMessage());
+				return CADASTRO_VIEW;
+			}
 	}
 	
 	@RequestMapping("/pesquisar")
-	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
-		Usuario usuario =  new Usuario();
-		usuario.setId(4l);
+	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro,HttpServletRequest request) {
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+
 		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro,usuario);
 		
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
@@ -98,26 +100,29 @@ public class TituloController {
 	}
 	
 	@RequestMapping("{codigo}")
-	public ModelAndView edicao(@PathVariable("codigo") Long codigoTitulo) {
-		Titulo titulo = cadastroTituloService.editar(codigoTitulo);
-		
-		ModelAndView mv = new ModelAndView(CADASTRO_VIEW); 
+	public ModelAndView edicao(@PathVariable("codigo") Long codigoTitulo,HttpServletRequest request){
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+		Titulo titulo = cadastroTituloService.editar(codigoTitulo,usuario);
+
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(titulo);
 		return mv;
 	}
 	
 	@RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
-		cadastroTituloService.excluir(codigo);
-		
+	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes,HttpServletRequest request) {
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+		cadastroTituloService.excluir(codigo,usuario);
+
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/cobranca/titulos/pesquisar";
 	}
 	
 	@RequestMapping(value="/{codigo}/receber", method = RequestMethod.PUT)
-	public @ResponseBody String receber(@PathVariable Long codigo){
+	public @ResponseBody String receber(@PathVariable Long codigo,HttpServletRequest request){
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
 
-		return cadastroTituloService.receber(codigo);
+		return cadastroTituloService.receber(codigo,usuario);
 	}
 	
 	@ModelAttribute("todosStatusTitulo")
