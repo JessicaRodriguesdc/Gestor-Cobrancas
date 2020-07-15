@@ -19,7 +19,7 @@ import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @Table(name = "titulo")
-public class Titulo{
+public class Titulo extends Util{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
@@ -31,7 +31,7 @@ public class Titulo{
 	@NotNull(message = "Date da cobranca é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date dataCobranca;
+	private Date dataCobranca = dataCadastro();
 
 	@NotNull(message = "Date de vencimento é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
