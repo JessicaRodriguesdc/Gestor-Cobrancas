@@ -2,7 +2,6 @@ package com.gestor.cobranca.titulo.service;
 
 import java.util.List;
 
-import com.gestor.cobranca.configuracao.Util;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,11 +20,8 @@ public class CadastroTituloService {
 	
 	public void salvar(Titulo titulo,Usuario usuario) throws IllegalAccessException {
 		try {
-			Util util = new Util();
-
 			titulo.setUsuario(usuario);
-			titulo.setDataCobranca(util.dataCadastro());
-			titulos.save(titulo);	
+			titulos.save(titulo);
 		}catch (DataIntegrityViolationException e) {
 			throw new IllegalAccessException("Formato de data inválido");
 		}

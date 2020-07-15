@@ -23,6 +23,5 @@ public class Util {
         Date date = new Date();
         calendar.setTime(date);
         return calendar.getTime();
-        //return new Date();
     }
 }
