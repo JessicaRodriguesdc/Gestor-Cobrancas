@@ -1,8 +1,10 @@
 package com.gestor.cobranca.usuario.controller;
 
 import com.gestor.cobranca.configuracao.Util;
+import com.gestor.cobranca.usuario.dao.UsuarioDao;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import com.gestor.cobranca.usuario.repository.Usuarios;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -22,14 +24,18 @@ public class UsuarioController {
     @Autowired
     private Usuarios repository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @RequestMapping
     public String login(Usuario usuario) {
         return LOGIN_VIEW;
     }
 
     @RequestMapping(value="/logar", method = RequestMethod.POST)
-    public String logar(Usuario usuario, HttpSession session, RedirectAttributes attributes, HttpServletRequest request){
+    public String logar(UsuarioDao usuarioDao, HttpSession session, RedirectAttributes attributes, HttpServletRequest request){
         request.getSession();
+        Usuario usuario = modelMapper.map(usuarioDao,Usuario.class);
 
         usuario = this.repository
                 .findByLoginAndSenha(usuario.getLogin(),Util.md5(usuario.getSenha()));
@@ -46,7 +52,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-    public String cadastrar(@Validated Usuario usuario) {
+    public String cadastrar(@Validated UsuarioDao usuarioDao) {
+        Usuario usuario = modelMapper.map(usuarioDao,Usuario.class);
 
         Usuario usuarioCadastrar = usuario;
         usuarioCadastrar.setSenha(Util.md5(usuario.getSenha()));

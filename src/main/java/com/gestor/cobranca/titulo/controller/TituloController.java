@@ -3,8 +3,10 @@ package com.gestor.cobranca.titulo.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gestor.cobranca.titulo.dto.TituloDto;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import com.gestor.cobranca.titulo.service.PainelStatusService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -39,6 +41,9 @@ public class TituloController {
 	@Autowired
 	private PainelStatusService graficoStatusService;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@RequestMapping
     public ModelAndView home(HttpServletRequest request) {
 		Usuario usuario = usuarioSessao(request);
@@ -61,8 +66,12 @@ public class TituloController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Titulo titulo, Errors errors,RedirectAttributes attributes,HttpServletRequest request) {
+	public String salvar(@Validated @ModelAttribute(value = "tituloDto")
+									  TituloDto tituloDto, Errors errors,
+						 RedirectAttributes attributes, HttpServletRequest request) {
 		Usuario usuario = usuarioSessao(request);
+		Titulo titulo = modelMapper.map(tituloDto,Titulo.class);
+
 		if(errors.hasErrors()) {
 				return CADASTRO_VIEW;
 			}
