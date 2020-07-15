@@ -3,8 +3,10 @@ package com.gestor.cobranca.titulo.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gestor.cobranca.titulo.dto.TituloDto;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import com.gestor.cobranca.titulo.service.PainelStatusService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -61,7 +63,8 @@ public class TituloController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Titulo titulo, Errors errors,RedirectAttributes attributes,HttpServletRequest request) {
+	public String salvar(@Validated Titulo titulo, Errors errors,
+						 RedirectAttributes attributes, HttpServletRequest request) {
 		Usuario usuario = usuarioSessao(request);
 		if(errors.hasErrors()) {
 				return CADASTRO_VIEW;
@@ -77,7 +80,8 @@ public class TituloController {
 	}
 	
 	@RequestMapping("/pesquisar")
-	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro,HttpServletRequest request) {
+	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro,
+								  HttpServletRequest request) {
 		Usuario usuario = usuarioSessao(request);
 
 		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro,usuario);
@@ -88,7 +92,8 @@ public class TituloController {
 	}
 	
 	@RequestMapping("{codigo}")
-	public ModelAndView edicao(@PathVariable("codigo") Long codigoTitulo,HttpServletRequest request){
+	public ModelAndView edicao(@PathVariable("codigo") Long codigoTitulo,
+							   HttpServletRequest request){
 		Usuario usuario = usuarioSessao(request);
 
 		Titulo titulo = cadastroTituloService.editar(codigoTitulo,usuario);
@@ -99,7 +104,8 @@ public class TituloController {
 	}
 	
 	@RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes,HttpServletRequest request){
+	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes,
+						  HttpServletRequest request){
 		Usuario usuario = usuarioSessao(request);
 		cadastroTituloService.excluir(codigo,usuario);
 

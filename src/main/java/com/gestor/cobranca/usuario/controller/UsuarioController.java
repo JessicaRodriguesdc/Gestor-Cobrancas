@@ -28,7 +28,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(value="/logar", method = RequestMethod.POST)
-    public String logar(Usuario usuario, HttpSession session, RedirectAttributes attributes, HttpServletRequest request){
+    public String logar(Usuario usuario, HttpSession session,
+                        RedirectAttributes attributes, HttpServletRequest request){
         request.getSession();
 
         usuario = this.repository
@@ -37,17 +38,18 @@ public class UsuarioController {
         if(usuario != null){
             //Guardar sessao o objeto usuario
             session.setAttribute("usuarioLogado",usuario);
+
             return "redirect:/cobranca/titulos";
         }else {
             //enviar mensagem de erro
             attributes.addFlashAttribute("mensagem","Login/Senha invalidos");
+
             return "redirect:/cobranca";
         }
     }
 
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
     public String cadastrar(@Validated Usuario usuario) {
-
         Usuario usuarioCadastrar = usuario;
         usuarioCadastrar.setSenha(Util.md5(usuario.getSenha()));
         repository.save(usuarioCadastrar);

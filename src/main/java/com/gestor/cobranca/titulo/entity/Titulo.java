@@ -20,12 +20,10 @@ import org.springframework.format.annotation.NumberFormat;
 @Entity
 @Table(name = "titulo")
 public class Titulo extends Util{
-	//Util util = new Util();
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	@NotBlank(message = "Descrição é obrigatória")
 	@Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
 	private String descricao;
@@ -39,13 +37,13 @@ public class Titulo extends Util{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
-	
+
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
 	@DecimalMax(value = "9999999.99", message = "Valor não pode ser maior que 9.999.999,99")
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valor;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;
 
