@@ -2,6 +2,9 @@ package com.gestor.cobranca.configuracao;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Util {
 
@@ -13,5 +16,13 @@ public class Util {
         }catch (Exception e){
             return "";
         }
+    }
+
+    public Date dataCadastro(){
+        Calendar calendar = new GregorianCalendar();
+        Date date = new Date();
+        calendar.setTime(date);
+        return calendar.getTime();
+        //return new Date();
     }
 }
