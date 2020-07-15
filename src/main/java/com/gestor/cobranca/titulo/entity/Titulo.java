@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.gestor.cobranca.configuracao.Util;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -18,8 +19,9 @@ import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @Table(name = "titulo")
-public class Titulo {
-	
+public class Titulo extends Util{
+	//Util util = new Util();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
@@ -28,9 +30,10 @@ public class Titulo {
 	@Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
 	private String descricao;
 
+	@NotNull(message = "Date da cobranca é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date dataCobranca;
+	private Date dataCobranca = dataCadastro();
 
 	@NotNull(message = "Date de vencimento é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
