@@ -30,7 +30,7 @@ public class Titulo {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date dataCobranca = new Date();
+	private Date dataCobranca;
 
 	@NotNull(message = "Date de vencimento é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
