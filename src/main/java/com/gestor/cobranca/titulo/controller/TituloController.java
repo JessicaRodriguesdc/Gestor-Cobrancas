@@ -3,10 +3,8 @@ package com.gestor.cobranca.titulo.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import com.gestor.cobranca.titulo.dto.TituloDto;
 import com.gestor.cobranca.usuario.entity.Usuario;
 import com.gestor.cobranca.titulo.service.PainelStatusService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.gestor.cobranca.titulo.entity.StatusTitulo;
 import com.gestor.cobranca.titulo.entity.Titulo;
 import com.gestor.cobranca.titulo.repository.filter.TituloFilter;
