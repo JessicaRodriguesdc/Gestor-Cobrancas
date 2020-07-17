@@ -21,22 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cobranca/titulos",
                         "/cobranca/titulos/*")
                 .permitAll()
-                .antMatchers(HttpMethod.PUT,"/cobranca/titulos/*/receber").denyAll()
-                .antMatchers(HttpMethod.DELETE,"/cobranca/titulos/*").denyAll()
+                .antMatchers(HttpMethod.PUT,"/cobranca/titulos/{codigo}/receber").denyAll()
+                .antMatchers(HttpMethod.DELETE,"/cobranca/titulos/{codigo}").denyAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/cobranca")
                 .permitAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/cobranca/titulos/*/receber").denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/cobranca/titulos/*").denyAll();
         http.headers().cacheControl();
-
-//        http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.POST).denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/you/can/alsoSpecifyAPath").denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.PATCH,"/path/is/Case/Insensitive").denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/and/can/haveWildcards/*").denyAll();
     }
 
     @Override
@@ -44,3 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/css/**","/fonts/**","/js/**");
     }
 }
+//        http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.POST).denyAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/you/can/alsoSpecifyAPath").denyAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.PATCH,"/path/is/Case/Insensitive").denyAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/and/can/haveWildcards/*").denyAll();
