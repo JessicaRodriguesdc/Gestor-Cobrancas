@@ -29,8 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         http.csrf().disable();
         http.headers().cacheControl();
-
-        //http.headers().frameOptions().disable();
     }
 
     @Override
@@ -38,8 +36,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/css/**","/fonts/**","/js/**");
     }
 }
-//        http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.POST).denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/you/can/alsoSpecifyAPath").denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.PATCH,"/path/is/Case/Insensitive").denyAll();
-//        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/and/can/haveWildcards/*").denyAll();
