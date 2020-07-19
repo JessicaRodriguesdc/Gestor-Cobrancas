@@ -1,5 +1,4 @@
 package com.gestor.cobranca.configuracao;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,14 +20,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/cobranca/titulos",
                         "/cobranca/titulos/*")
                 .permitAll()
-                .antMatchers(HttpMethod.PUT,"/cobranca/titulos/{codigo}/receber").denyAll()
-                .antMatchers(HttpMethod.DELETE,"/cobranca/titulos/{codigo}").denyAll()
+                .mvcMatchers(HttpMethod.PUT,"/cobranca/titulos/{codigo}/receber").permitAll()
+                .mvcMatchers(HttpMethod.DELETE,"/cobranca/titulos/{codigo}").denyAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/cobranca")
                 .permitAll();
+        http.csrf().disable();
         http.headers().cacheControl();
+
+        //http.headers().frameOptions().disable();
     }
 
     @Override
