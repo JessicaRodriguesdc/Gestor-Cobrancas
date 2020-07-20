@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 
 public class Util {
 
+    //Criptografa/Descriptografa a senha do usuario ao cadastrar e ao logar
     public static String md5(String senha){
         try{
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -18,6 +19,7 @@ public class Util {
         }
     }
 
+    //Pega a data do dia
     public Date dataCadastro(){
         Calendar calendar = new GregorianCalendar();
         Date date = new Date();
