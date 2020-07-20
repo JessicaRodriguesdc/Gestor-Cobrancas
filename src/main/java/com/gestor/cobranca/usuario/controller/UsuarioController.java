@@ -22,11 +22,14 @@ public class UsuarioController {
     @Autowired
     private Usuarios repository;
 
+    //Rota de pagina de login/cadastro
     @RequestMapping
     public String login(Usuario usuario) {
+
         return LOGIN_VIEW;
     }
 
+    //Rota para efetuar o login no sistema
     @RequestMapping(value="/logar", method = RequestMethod.POST)
     public String logar(Usuario usuario, HttpSession session,
                         RedirectAttributes attributes, HttpServletRequest request){
@@ -48,6 +51,7 @@ public class UsuarioController {
         }
     }
 
+    //Rota para criar um novo usuario no sistema
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
     public String cadastrar(@Validated Usuario usuario) {
         Usuario usuarioCadastrar = usuario;
@@ -57,6 +61,7 @@ public class UsuarioController {
         return "redirect:/cobranca";
     }
 
+    //Rota para deslogar no sistema
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(HttpSession session) {
         session.invalidate();
