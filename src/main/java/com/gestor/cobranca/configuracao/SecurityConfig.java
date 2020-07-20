@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //Configurando a seguranca
+    //Add rotas do sistema na configuracao
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -31,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().cacheControl();
     }
 
+    //Mostrando a visualizacao para os arquivos de fontes e Script's
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/css/**","/fonts/**","/js/**");
