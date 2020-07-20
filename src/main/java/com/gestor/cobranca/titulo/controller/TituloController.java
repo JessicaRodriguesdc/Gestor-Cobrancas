@@ -38,6 +38,7 @@ public class TituloController {
 	@Autowired
 	private PainelStatusService graficoStatusService;
 
+	//Rota da pagina inicial ao logar mostrando a quantidade de pendentes e recebidos
 	@RequestMapping
     public ModelAndView home(HttpServletRequest request) {
 		Usuario usuario = usuarioSessao(request);
@@ -51,14 +52,15 @@ public class TituloController {
 		return mv;
     }
 	
-	
+	//Rota da pagina de criancao de um novo titulo de cobranca
 	@RequestMapping("/novo")
     public ModelAndView novo() {
 		ModelAndView mv= new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Titulo());
         return mv;
     }
-	
+
+    //Rota de criancao de um novo titulo de cobranca
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Titulo titulo, Errors errors,
 						 RedirectAttributes attributes, HttpServletRequest request) {
@@ -75,7 +77,8 @@ public class TituloController {
 				return CADASTRO_VIEW;
 			}
 	}
-	
+
+	//Rota para pesquisar titulo da cpbranca a partir da descricao
 	@RequestMapping("/pesquisar")
 	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro,
 								  HttpServletRequest request) {
@@ -87,7 +90,8 @@ public class TituloController {
 		mv.addObject("titulos",todosTitulos);
 		return mv;
 	}
-	
+
+	//Rota de ediar titulo da cpbranca a partir do id/codigo
 	@RequestMapping("{codigo}")
 	public ModelAndView edicao(@PathVariable("codigo") Long codigoTitulo,
 							   HttpServletRequest request){
@@ -99,7 +103,8 @@ public class TituloController {
 		mv.addObject(titulo);
 		return mv;
 	}
-	
+
+	//Rota de excluir titulo da cpbranca a partir do id/codigo
 	@RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes,
 						  HttpServletRequest request){
@@ -109,19 +114,22 @@ public class TituloController {
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/cobranca/titulos/pesquisar";
 	}
-	
+
+	//Rota para receber titulo da cobranca
 	@RequestMapping(value="/{codigo}/receber", method = RequestMethod.PUT)
 	public @ResponseBody String receber(@PathVariable Long codigo,HttpServletRequest request){
 		Usuario usuario = usuarioSessao(request);
 
 		return cadastroTituloService.receber(codigo,usuario);
 	}
-	
+
+	//Lista todos os status do titulo
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> todosStatusTitulo(){
 		return Arrays.asList(StatusTitulo.values());
 	}
 
+	//Pega o usuario logado na sessao
 	private Usuario usuarioSessao(HttpServletRequest request){
 		Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
 		return usuario;

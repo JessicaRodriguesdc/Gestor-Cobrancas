@@ -11,8 +11,7 @@ public class CadastroUsuarioService {
     @Autowired
     private Usuarios usuarios;
 
-
-
+    //Servico para criar um novo usuario
     public void salvar(Usuario usuario){
         usuarios.save(usuario);
     }

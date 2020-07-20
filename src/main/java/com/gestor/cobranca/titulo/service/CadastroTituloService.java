@@ -17,7 +17,8 @@ public class CadastroTituloService {
 
 	@Autowired
 	private Titulos titulos;
-	
+
+	//Servico para criar um novo titulo de servico
 	public void salvar(Titulo titulo,Usuario usuario) throws IllegalAccessException {
 		try {
 			titulo.setUsuario(usuario);
@@ -27,13 +28,16 @@ public class CadastroTituloService {
 		}
 		
 	}
-	
+
+	//Servico para editar um novo titulo de servico
 	public Titulo editar(Long codigoTitulo,Usuario usuario) {
 		Titulo titulo = titulos.getOne(codigoTitulo);
 		titulo.setUsuario(usuario);
 		return titulo;
 	}
-	
+
+
+	//Servico para excluir um novo titulo de servico
 	public void excluir(Long codigo,Usuario usuario) {
 		Titulo titulo = titulos.getOne(codigo);
 		if (titulo.getUsuario().getId().equals(usuario.getId())){
@@ -41,6 +45,7 @@ public class CadastroTituloService {
 		}
 	}
 
+	//Servico para editar o status do titulo da cobranca para "RECEBIDO"
 	public String receber(Long codigo, Usuario usuario) {
 		Titulo titulo = titulos.getOne(codigo);
 
@@ -52,7 +57,8 @@ public class CadastroTituloService {
 		}
 		return StatusTitulo.PENDENTE.getDescricao();
 	}
-	
+
+	//Servico para listar os titulos de cobranca pelo usuario
 	public List<Titulo> filtrar(TituloFilter filtro, Usuario usuario){
 		String descricao = filtro.getDescricao() == null ? "" : filtro.getDescricao();		
 		return titulos.findByDescricaoContainingAndUsuario(descricao,usuario);
