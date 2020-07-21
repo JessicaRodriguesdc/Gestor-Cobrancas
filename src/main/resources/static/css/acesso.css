@@ -118,8 +118,8 @@ input[type="submit"]:hover{
     color: #7f7c7c;
     left: 0px;
     height: 20px;
-    width: 440px;
-    padding: 17px 30px 20px 30px;
+    width: 400px;
+    padding: 17px 30px 20px 20px;
     font-size: 16px;
     text-align: right;
     border-top: 1px solid #dbe5e8;
@@ -133,7 +133,7 @@ input[type="submit"]:hover{
     background: #f7f8f1;
     padding: 6px;
     color: #004600;
-    margin-left: 10px;
+    margin-left: 9px;
 
     -webkit-border-radius: 4px;
     border-radius: 4px;
