@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/acesso.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datepicker.standalone.min.css}"/>
+</head>
+<body>
+    <div class="panel panel-default">
+
+        <div class="alert alert-danger" th:if="${!#strings.isEmpty(mensagem)}">
+            <center><span th:text="${mensagem}"></span></center>
+        </div>
+
+        <div class="panel-body">
+            <div class="container" >
+                <a class="links" id="paracadastro"></a>
+                <a class="links" id="paralogin"></a>
+
+                <div class="content">
+                    <!--FORMULÁRIO DE LOGIN-->
+<!--                    <div id="login">-->
+<!--                        <form class="form-horizontal" method="Post" th:action="@{/cobranca/logar}" th:object="${usuario}">-->
+<!--                            <h1>$ Logar-se</h1>-->
+<!--                            <p>-->
+<!--                                <label for="login_log">Login</label>-->
+<!--                                <input-->
+<!--                                        id="login_log"-->
+<!--                                        name="login_log"-->
+<!--                                        required="required"-->
+<!--                                        type="text"-->
+<!--                                        placeholder="ex. contato@htmlecsspro.com"-->
+<!--                                        th:field="*{login}"-->
+<!--                                />-->
+<!--                            </p>-->
+
+<!--                            <p>-->
+<!--                                <label for="senha_log">Senha</label>-->
+<!--                                <input-->
+<!--                                        id="senha_log"-->
+<!--                                        name="senha_log"-->
+<!--                                        required="required"-->
+<!--                                        type="password"-->
+<!--                                        placeholder="ex. senha"-->
+<!--                                        th:field="*{senha}"-->
+<!--                                />-->
+<!--                            </p>-->
+
+<!--                            <p>-->
+<!--                                <input type="submit" value="Logar"/>-->
+<!--                            </p>-->
+
+<!--                            <p class="link">-->
+<!--                                Ainda não tem conta?-->
+<!--                                <a href="#paracadastro">Cadastre-se</a>-->
+<!--                            </p>-->
+<!--                        </form>-->
+<!--                    </div>-->
+
+                    <!--FORMULÁRIO DE CADASTRO-->
+                    <div id="cadastro">
+                        <form method="post" class="form-horizontal" th:action="@{/cobranca/cadastrar}" th:object="${usuario}">
+                            <h1>$ Cadastrar-se</h1>
+                            <p>
+                                <label for="nome_cad">Seu nome</label>
+                                <input
+                                        id="nome_cad"
+                                        name="nome_cad"
+                                        required="required"
+                                        type="text" placeholder="nome"
+                                        th:field="*{nome}"
+                                />
+                            </p>
+
+                            <p>
+                                <label for="login_cad">Seu login</label>
+                                <input
+                                        id="login_cad"
+                                        name="login_cad"
+                                        required="required"
+                                        type="text" placeholder="login"
+                                        th:field="*{login}"
+                                />
+                            </p>
+
+                            <p>
+                                <label for="email_cad">Seu e-mail</label>
+                                <input
+                                        id="email_cad"
+                                        name="email_cad"
+                                        required="required"
+                                        type="email"
+                                        placeholder="contato@htmlecsspro.com"
+                                        th:field="*{email}"
+                                />
+                            </p>
+
+                            <p>
+                                <label for="senha_cad">Sua senha</label>
+                                <input
+                                        id="senha_cad"
+                                        name="senha_cad"
+                                        required="required"
+                                        type="password"
+                                        placeholder="ex. 1234"
+                                        th:field="*{senha}"
+                                />
+                            </p>
+
+                            <p>
+                                <input type="submit" value="Cadastrar"/>
+                            </p>
+
+                            <p class="link">
+                                Já tem conta?
+                                <a href="#paralogin"> Ir para Login </a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
